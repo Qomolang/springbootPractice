@@ -51,7 +51,7 @@ public class GraphQLProvider {
                 .type(newTypeWiring("Book")
                         .dataFetcher("author", graphQLDataFetchers.getAuthorDataFetcher())
                         //每一个参数名称不一样都要额外配置一个dataFetcher
-                        .dataFetcher("bookId",graphQLDataFetchers.getBookIdDataFetcher())
+                        .dataFetcher("bookId", graphQLDataFetchers.getBookIdDataFetcher())
                         .dataFetcher("pageCount", graphQLDataFetchers.getPageCountDataFetcher()))
 
                 .build();
