@@ -14,18 +14,19 @@ import java.util.Map;
  */
 public class GraphQLDataFetchers {
 
+    //也可以是数据库或者外部服务
     private static List<Map<String, String>> books = Arrays.asList(
             ImmutableMap.of("id", "book-1",
                     "name", "Harry Potter and the Philosopher's Stone",
-                    "pageCount", "223",
+                    "totalPages", "223",
                     "authorId", "author-1"),
             ImmutableMap.of("id", "book-2",
                     "name", "Moby Dick",
-                    "pageCount", "635",
+                    "totalPages", "635",
                     "authorId", "author-2"),
             ImmutableMap.of("id", "book-3",
                     "name", "Interview with the vampire",
-                    "pageCount", "371",
+                    "totalPages", "371",
                     "authorId", "author-3")
     );
 
@@ -43,10 +44,11 @@ public class GraphQLDataFetchers {
 
     public DataFetcher getBookByIdDataFetcher() {
         return dataFetchingEnvironment -> {
-            String bookId = dataFetchingEnvironment.getArgument("id");
+            //backendBookId 前端传入的参数值 .getArgument指前端传入的参数名称
+            String backendBookId = dataFetchingEnvironment.getArgument("inputBookid");
             return books
                     .stream()
-                    .filter(book -> book.get("id").equals(bookId))
+                    .filter(book -> book.get("id").equals(backendBookId))
                     .findFirst()
                     .orElse(null);
         };
@@ -54,8 +56,9 @@ public class GraphQLDataFetchers {
 
     public DataFetcher getAuthorDataFetcher() {
         return dataFetchingEnvironment -> {
-            Map<String,String> book = dataFetchingEnvironment.getSource();
-            String authorId = book.get("authorId");
+            //此时book的primitive信息已经找到了，缺少book中auth信息
+            Map<String,String> backendBook = dataFetchingEnvironment.getSource();
+            String authorId = backendBook.get("authorId");
             return authors
                     .stream()
                     .filter(author -> author.get("id").equals(authorId))
@@ -66,8 +69,9 @@ public class GraphQLDataFetchers {
 
     public DataFetcher getPageCountDataFetcher() {
         return dataFetchingEnvironment -> {
-            Map<String,String> book = dataFetchingEnvironment.getSource();
-            return book.get("totalPages");
+            //book代表后端返上来的数据
+            Map<String,String> backendBook = dataFetchingEnvironment.getSource();
+            return backendBook.get("totalPages");
         };
     }
 }

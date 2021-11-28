@@ -46,10 +46,14 @@ public class GraphQLProvider {
 
     private RuntimeWiring buildWiring() {
         return RuntimeWiring.newRuntimeWiring()
+                //根据类型找
                 .type(newTypeWiring("Query")
+                        //映射：前端查询中输入bookById 后端返回DataFetcher
                         .dataFetcher("bookById", graphQLDataFetchers.getBookByIdDataFetcher()))
                 .type(newTypeWiring("Book")
-                        .dataFetcher("author", graphQLDataFetchers.getAuthorDataFetcher()))
+                        .dataFetcher("author", graphQLDataFetchers.getAuthorDataFetcher())
+                        .dataFetcher("pageCount", graphQLDataFetchers.getPageCountDataFetcher()))
+
                 .build();
     }
 

@@ -1,9 +1,9 @@
 type Query {
-    bookById(id: ID): Book
+    bookById(inputBookid: ID): Book
 }
 
 type Book {
-    id: ID
+    bookId: ID
     name: String
     pageCount: Int
     author: Author
