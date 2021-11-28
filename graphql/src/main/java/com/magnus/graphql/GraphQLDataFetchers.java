@@ -57,7 +57,7 @@ public class GraphQLDataFetchers {
     public DataFetcher getAuthorDataFetcher() {
         return dataFetchingEnvironment -> {
             //此时book的primitive信息已经找到了，缺少book中auth信息
-            Map<String,String> backendBook = dataFetchingEnvironment.getSource();
+            Map<String, String> backendBook = dataFetchingEnvironment.getSource();
             String authorId = backendBook.get("authorId");
             return authors
                     .stream()
@@ -70,8 +70,16 @@ public class GraphQLDataFetchers {
     public DataFetcher getPageCountDataFetcher() {
         return dataFetchingEnvironment -> {
             //book代表后端返上来的数据
-            Map<String,String> backendBook = dataFetchingEnvironment.getSource();
+            Map<String, String> backendBook = dataFetchingEnvironment.getSource();
             return backendBook.get("totalPages");
+        };
+    }
+
+    public DataFetcher getBookIdDataFetcher() {
+        return dataFetchingEnvironment -> {
+            //book代表后端返上来的数据
+            Map<String, String> backendBook = dataFetchingEnvironment.getSource();
+            return backendBook.get("id");
         };
     }
 }

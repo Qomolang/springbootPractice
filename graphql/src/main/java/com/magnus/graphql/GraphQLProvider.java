@@ -21,8 +21,6 @@ import static graphql.schema.idl.TypeRuntimeWiring.newTypeWiring;
 
 @Component
 public class GraphQLProvider {
-
-
     @Autowired
     GraphQLDataFetchers graphQLDataFetchers;
 
@@ -46,12 +44,14 @@ public class GraphQLProvider {
 
     private RuntimeWiring buildWiring() {
         return RuntimeWiring.newRuntimeWiring()
-                //根据类型找
+                //fieldName 为前端传入参数名称
                 .type(newTypeWiring("Query")
                         //映射：前端查询中输入bookById 后端返回DataFetcher
                         .dataFetcher("bookById", graphQLDataFetchers.getBookByIdDataFetcher()))
                 .type(newTypeWiring("Book")
                         .dataFetcher("author", graphQLDataFetchers.getAuthorDataFetcher())
+                        //每一个参数名称不一样都要额外配置一个dataFetcher
+                        .dataFetcher("bookId",graphQLDataFetchers.getBookIdDataFetcher())
                         .dataFetcher("pageCount", graphQLDataFetchers.getPageCountDataFetcher()))
 
                 .build();
