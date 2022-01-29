@@ -11,7 +11,7 @@ import javax.validation.Valid;
 
 @Slf4j
 @RestController
-public class DemoController {
+public class ErrorHandlerController {
 
     @GetMapping("/")
     public String index() {
