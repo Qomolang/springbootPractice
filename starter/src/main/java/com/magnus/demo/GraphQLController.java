@@ -13,22 +13,26 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * @author 84028
+ */
 @RestController
 @Internal
 public class GraphQLController {
 
-    @Autowired
+    @Resource
     GraphQLInvocation graphQLInvocation;
 
-    @Autowired
+    @Resource
     ExecutionResultHandler executionResultHandler;
 
-    @Autowired
+    @Resource
     ObjectMapper objectMapper;
 
     @RequestMapping(value = "${graphql.url:graphql}",

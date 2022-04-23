@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.HandlerMethod;
 
+/**
+ * @author 84028
+ */
 @RestControllerAdvice
 public class ControllerExceptionConfiguration {
 

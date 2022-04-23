@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 
 /**
  * 拦截器注册中心
+ * @author 84028
  */
 @Configuration
 public class InterceptorsRegistry implements WebMvcConfigurer {
