@@ -1,4 +1,4 @@
-package com.magnus.demo.configuration;
+package com.magnus.demo.config;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
